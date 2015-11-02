@@ -1,5 +1,7 @@
 [user]
-	email = jfleray@free.fr
+	email = kanardito14@free.fr
 	name = Jeff
 [credential]
 	helper = cache --timeout=3600
+[push]
+	default = simple
