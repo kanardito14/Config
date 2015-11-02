@@ -1,0 +1,5 @@
+[user]
+	email = jfleray@free.fr
+	name = Jeff
+[credential]
+	helper = cache --timeout=3600
