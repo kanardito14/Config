@@ -1,0 +1,2 @@
+# Config
+Global account configuration
