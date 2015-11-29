@@ -2,6 +2,10 @@
 
 PATH=$PATH:$HOME/Bin
 
+if [ -f "$HOME/.environ" ]; then
+    . "$HOME/.environ"
+fi
+
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
@@ -21,10 +25,6 @@ if [ -x /usr/bin/dircolors ]; then
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
 fi
-
-export EDITOR=vi
-export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
-export LESS="-M -R -W -X"
 
 # Lines configured by zsh-newuser-install
 

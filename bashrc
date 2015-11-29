@@ -2,6 +2,12 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+PATH=$PATH:$HOME/Bin
+
+if [ -f "$HOME/.environ" ]; then
+    . "$HOME/.environ"
+fi
+
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
@@ -50,7 +56,7 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;31m\]Bash:\[\033[01;33m\]\u\[\033[00m\]@\[\033[01;32m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
@@ -101,9 +107,3 @@ fi
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
-
-export PERL_LOCAL_LIB_ROOT="/home/jfleray/perl5";
-export PERL_MB_OPT="--install_base /home/jfleray/perl5";
-export PERL_MM_OPT="INSTALL_BASE=/home/jfleray/perl5";
-export PERL5LIB="/home/jfleray/perl5/lib/perl5/i686-linux-gnu-thread-multi-64int:/home/jfleray/perl5/lib/perl5";
-export PATH="/home/jfleray/perl5/bin:$PATH";

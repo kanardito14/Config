@@ -24,7 +24,7 @@
 #
 
 alignment bottom_right
-background yes
+background no
 
 border_width 1
 cpu_avg_samples 2
@@ -72,8 +72,8 @@ ${scroll 35 $nodename $sysname $kernel}
 $color$hr
 ${color grey}Uptime   :${color yellow} $uptime
 ${color grey}Frequency:${color ffb000} $freq_g GHz
-${color grey}Temp Int :${color green} ${lua thermalread 0} C
-${color grey}Temp Ext :${color green} ${texeci 30 cat /home/jfleray/.cache/conky/temperature}
+${color grey}Temp Int :${color green} ${lua thermint 0} C
+${color grey}Temp Ext :${color green} ${lua thermext 0} C
 $color$hr
 ${color grey}RAM  Usage:$color $memperc%${color cyan}$alignr$mem${color grey} / $memmax
 ${color grey}Swap Usage:$color $swapperc%${color cyan}$alignr$swap${color grey} / $swapmax
