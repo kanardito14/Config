@@ -32,7 +32,7 @@ function graph_set_color(graph, pos, red, green, blue, aplha)
 end
 
 function graph_plot_bar(graph, x, y)
-   local max = math.max(graph.max, graph.min + 4)
+   local max = math.max(graph.max, graph.min + graph.height)
    local z = (y - graph.min)/(max - graph.min)
    
    cairo_set_source_rgb(graph.cr,
@@ -223,7 +223,7 @@ function graph_read(graph, name)
 	 break
       end
    end
-   fdesc:close()
+   if fdesc then fdesc:close() end
 
    graph.min = graph[0]
    graph.max = graph[0]
@@ -271,7 +271,7 @@ function conky_main()
 
    -- deferred initialization (cr value is not immédiately
    -- avalaible)
-   if conky_window and iteration == 4 then
+   if conky_window and iteration == 5 then
       cs = cairo_xlib_surface_create(conky_window.display,
 				     conky_window.drawable,
 				     conky_window.visual,
