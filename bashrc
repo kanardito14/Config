@@ -2,8 +2,6 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
-PATH=$PATH:$HOME/Bin
-
 if [ -f "$HOME/.environ" ]; then
     . "$HOME/.environ"
 fi

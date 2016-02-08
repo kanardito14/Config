@@ -1,6 +1,4 @@
-# Zshrc script
-
-PATH=$PATH:$HOME/Bin
+# ~/.zshrc: executed by zsh(1) for non-login shells.
 
 if [ -f "$HOME/.environ" ]; then
     . "$HOME/.environ"
