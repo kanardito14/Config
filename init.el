@@ -9,7 +9,19 @@
 ;;
 ;; This file is NOT part of GNU Emacs.
 
+
+;;;; Local Jeff addons
+(put 'eval-expression 'disabled nil)
+(put 'upcase-region 'disabled nil)
+;;;;(setq load-path (cons "~/lisp/" load-path))
+(setq shell-prompt-pattern "jfleray@.*:.*\\[[0-9][0-9]*\\]%")
+;;;; Local Jeff addons
+
 (require 'cl)				; common lisp goodies, loop
+
+(require 'package)
+(add-to-list 'package-archives
+             '("melpa" . "http://melpa.org/packages/") t)
 
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 
@@ -33,46 +45,40 @@
 		   (global-set-key (kbd "<C-S-left>")   'buf-move-left)
 		   (global-set-key (kbd "<C-S-right>")  'buf-move-right)))
 
-   (:name smex				; a better (ido like) M-x
-	  :after (progn
-		   (setq smex-save-file "~/.emacs.d/.smex-items")
-		   (global-set-key (kbd "M-x") 'smex)
-		   (global-set-key (kbd "M-X") 'smex-major-mode-commands)))
+;;;   (:name smex				; a better (ido like) M-x
+;;;	  :after (progn
+;;;		   (setq smex-save-file "~/.emacs.d/.smex-items")
+;;;		   (global-set-key (kbd "M-x") 'smex)
+;;;		   (global-set-key (kbd "M-X") 'smex-major-mode-commands)))
 
-   (:name magit				; git meet emacs, and a binding
-	  :after (progn
-		   (global-set-key (kbd "C-x C-z") 'magit-status)))
+;;;   (:name magit				; git meet emacs, and a binding
+;;;	  :after (progn
+;;;		   (global-set-key (kbd "C-x C-z") 'magit-status)))
 
    (:name goto-last-change		; move pointer back to last change
 	  :after (progn
 		   ;; when using AZERTY keyboard, consider C-x C-_
-		   (global-set-key (kbd "C-x C-/") 'goto-last-change)))))
+		   (global-set-key (kbd "C-x C-_") 'goto-last-change)))))
 
 ;; now set our own packages
 (setq
  my:el-get-packages
  '(el-get				; el-get is self-hosting
-   escreen            			; screen for emacs, C-\ C-h
-   php-mode-improved			; if you're into php...
-   switch-window			; takes over C-x o
-   auto-complete			; complete as you type with overlays
-   yasnippet 				; powerful snippet mode
-   zencoding-mode			; http://www.emacswiki.org/emacs/ZenCoding
-   color-theme		                ; nice looking emacs
-   color-theme-tango))	                ; check out color-theme-solarized
+;;;   escreen            		; screen for emacs, C-\ C-h
+;;;   php-mode-improved			; if you're into php...
+;;;   switch-window			; takes over C-x o
+;;;   auto-complete			; complete as you type with overlays
+;;;   yasnippet 			; powerful snippet mode
+;;;   zencoding-mode			; http://www.emacswiki.org/emacs/ZenCoding
+;;;   color-theme		        ; nice looking emacs
+;;;   color-theme-tango                 ; check out color-theme-solarized
+   ))	                
 
 ;;
 ;; Some recipes require extra tools to be installed
 ;;
 ;; Note: el-get-install requires git, so we know we have at least that.
 ;;
-(when (ignore-errors (el-get-executable-find "cvs"))
-  (add-to-list 'my:el-get-packages 'emacs-goodies-el)) ; the debian addons for emacs
-
-(when (ignore-errors (el-get-executable-find "svn"))
-  (loop for p in '(psvn    		; M-x svn-status
-		   )
-	do (add-to-list 'my:el-get-packages p)))
 
 (setq my:el-get-packages
       (append
@@ -89,29 +95,19 @@
 
 (tool-bar-mode -1)			; no tool bar with icons
 (scroll-bar-mode -1)			; no scroll bars
-(unless (string-match "apple-darwin" system-configuration)
-  ;; on mac, there's always a menu bar drown, don't have it empty
-  (menu-bar-mode -1))
 
 ;; choose your own fonts, in a system dependant way
 (if (string-match "apple-darwin" system-configuration)
-    (set-face-font 'default "Monaco-13")
-  (set-face-font 'default "Monospace-10"))
+    (set-face-font 'default "Monaco-13"))
 
 (global-hl-line-mode)			; highlight current line
 (global-linum-mode 1)			; add line numbers on the left
 
 ;; avoid compiz manager rendering bugs
-(add-to-list 'default-frame-alist '(alpha . 100))
+(setq default-frame-alist '((width . 100) (height . 35) (left . 50) (alpha . 100))) 
 
 ;; copy/paste with C-c and C-v and C-x, check out C-RET too
-(cua-mode)
-
-;; under mac, have Command as Meta and keep Option for localized input
-(when (string-match "apple-darwin" system-configuration)
-  (setq mac-allow-anti-aliasing t)
-  (setq mac-command-modifier 'meta)
-  (setq mac-option-modifier 'none))
+;;;(cua-mode)
 
 ;; Use the clipboard, pretty please, so that copy/paste "works"
 (setq x-select-enable-clipboard t)
@@ -149,31 +145,9 @@
 ;; Well the real default would be C-c C-j C-y C-c C-k.
 (define-key term-raw-map  (kbd "C-y") 'term-paste)
 
-;; use ido for minibuffer completion
-(require 'ido)
-(ido-mode t)
-(setq ido-save-directory-list-file "~/.emacs.d/.ido.last")
-(setq ido-enable-flex-matching t)
-(setq ido-use-filename-at-point 'guess)
-(setq ido-show-dot-for-dired t)
-(setq ido-default-buffer-method 'selected-window)
-
-;; default key to switch buffer is C-x b, but that's not easy enough
-;;
-;; when you do that, to kill emacs either close its frame from the window
-;; manager or do M-x kill-emacs.  Don't need a nice shortcut for a once a
-;; week (or day) action.
-(global-set-key (kbd "C-x C-b") 'ido-switch-buffer)
-(global-set-key (kbd "C-x C-c") 'ido-switch-buffer)
-(global-set-key (kbd "C-x B") 'ibuffer)
-
-;; have vertical ido completion lists
-(setq ido-decorations
-      '("\n-> " "" "\n   " "\n   ..." "[" "]"
-	" [No match]" " [Matched]" " [Not readable]" " [Too big]" " [Confirm]"))
-
 ;; C-x C-j opens dired with the cursor right on the file you're editing
 (require 'dired-x)
+(require 'compile)
 
 ;; full screen
 (defun fullscreen ()
