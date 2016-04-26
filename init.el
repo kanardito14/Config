@@ -13,8 +13,12 @@
 ;;;; Local Jeff addons
 (put 'eval-expression 'disabled nil)
 (put 'upcase-region 'disabled nil)
-;;;;(setq load-path (cons "~/lisp/" load-path))
 (setq shell-prompt-pattern "jfleray@.*:.*\\[[0-9][0-9]*\\]%")
+(setq explicit-shell-file-name "/bin/bash")
+(setq shell-file-name "bash")
+(setq explicit-bash.exe-args '("-i"))
+(setenv "SHELL" shell-file-name)
+;;;;(setq load-path (cons "~/lisp/" load-path))
 ;;;; Local Jeff addons
 
 (require 'cl)				; common lisp goodies, loop

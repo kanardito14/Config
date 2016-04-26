@@ -85,8 +85,8 @@ ${color grey}Root:$color $fs_used_perc%${color yellow}$alignr${fs_used /}${color
 ${color grey}Sda :$color ${diskio sda}/s ${color black}${diskiograph sda 10,0 404000 ffff00 -t}
 $color$hr
 ${color grey}Networking:
-${color grey}Up  :$color ${upspeed wlan0} ${color black}${upspeedgraph wlan0 10,0 002000 00ff00 -t}
-${color grey}Down:$color ${downspeed wlan0} ${color black}${downspeedgraph wlan0 10,0 002000 00ff00 -t}
+${color grey}Up  :$color ${upspeed wlp3s0} ${color black}${upspeedgraph wlp3s0 10,0 002000 00ff00 -t}
+${color grey}Down:$color ${downspeed wlp3s0} ${color black}${downspeedgraph wlp3s0 10,0 002000 00ff00 -t}
 $color$hr
 ${color grey}Name              PID    CPU%   MEM%
 ${color lightgrey} ${top name 1} ${top pid 1} ${top cpu 1} ${top mem 1}

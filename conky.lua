@@ -111,7 +111,7 @@ function new_graph(px, py, width, init)
    graph.px=px
    graph.py=py
    graph.width=width
-   graph.height=10
+   graph.height=9
 
    for i =0,width do
       graph[i] = init
@@ -248,7 +248,7 @@ function conky_main()
       -- graphique température intérieure (CPU 0)
       --
       
-      temp_int = new_graph(151.5, 86, 150, get_proc_temp("0"))
+      temp_int = new_graph(151.5, 78, 150, get_proc_temp("0"))
       temp_int.interval = 5
       temp_int.get_value = graph_get_proc0_temp
       
@@ -259,7 +259,7 @@ function conky_main()
       -- graphique température extérieure (LFRK)
       --
       
-      temp_ext = new_graph(151.5, 103, 150, metar_temp)
+      temp_ext = new_graph(151.5, 93, 150, metar_temp)
       graph_read(temp_ext, "LFRK")
       temp_ext.interval = 900
       temp_ext.get_value = graph_get_lfrk_temp
