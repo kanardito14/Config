@@ -248,7 +248,7 @@ function conky_main()
       -- graphique température intérieure (CPU 0)
       --
       
-      temp_int = new_graph(151.5, 78, 150, get_proc_temp("0"))
+      temp_int = new_graph(151.5, 77, 150, get_proc_temp("0"))
       temp_int.interval = 5
       temp_int.get_value = graph_get_proc0_temp
       
@@ -259,7 +259,7 @@ function conky_main()
       -- graphique température extérieure (LFRK)
       --
       
-      temp_ext = new_graph(151.5, 93, 150, metar_temp)
+      temp_ext = new_graph(151.5, 92, 150, metar_temp)
       graph_read(temp_ext, "LFRK")
       temp_ext.interval = 900
       temp_ext.get_value = graph_get_lfrk_temp
@@ -271,7 +271,7 @@ function conky_main()
 
    -- deferred initialization (cr value is not immédiately
    -- avalaible)
-   if conky_window and iteration == 5 then
+   if conky_window and (iteration % 100) == 5 then
       cs = cairo_xlib_surface_create(conky_window.display,
 				     conky_window.drawable,
 				     conky_window.visual,
