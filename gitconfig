@@ -10,4 +10,4 @@
 	diff = auto
 	interactive = auto
 	status = auto
-	pager = false
+	pager = true
