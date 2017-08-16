@@ -39,17 +39,17 @@ values."
      ;; ----------------------------------------------------------------
      helm
      ;; auto-completion
-     ;; better-defaults
+     better-defaults
      emacs-lisp
      git
-     ;; markdown
+     markdown
      ;; org
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
-     ;; spell-checking
-     ;; syntax-checking
-     ;; version-control
+     spell-checking
+     syntax-checking
+     version-control
      python
      lua
      )
