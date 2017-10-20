@@ -34,7 +34,7 @@ end
 function graph_plot_bar(graph, x, y)
    local max = math.max(graph.max, graph.min + graph.height)
    local z = (y - graph.min)/(max - graph.min)
-   
+
    cairo_set_source_rgb(graph.cr,
 			interp(graph.red_t, graph.red_b, z),
 			interp(graph.green_t, graph.green_b, z), 
@@ -49,7 +49,7 @@ function graph_plot(graph)
       cairo_set_line_cap(graph.cr, graph.line_cap)
       cairo_set_line_width(graph.cr, graph.line_width)
       for i=0,graph.width do
-	 graph_plot_bar(graph, i, graph[i])
+        graph_plot_bar(graph, i, graph[i])
       end
       --   print("plot graph to", cr)
    end
@@ -72,21 +72,21 @@ function graph_push(graph, iteration, value)
 	    "min  ", graph.min)
   
       if graph.max ~= graph[0] then
-	 if value > graph.max then graph.max = value end
+        if value > graph.max then graph.max = value end
       else
-	 graph.max = value
-	 for i=1,graph.width do
-	    if graph[i] > graph.max then graph.max = graph[i] end
-	 end
+        graph.max = value
+        for i=1,graph.width do
+          if graph[i] > graph.max then graph.max = graph[i] end
+        end
       end
       
       if graph.min ~= graph[0] then
-	 if value < graph.min then graph.min = value end
+        if value < graph.min then graph.min = value end
       else
-	 graph.min = value
-	 for i=1,graph.width do
-	    if graph[i] < graph.min then graph.min = graph[i] end
-	 end
+        graph.min = value
+        for i=1,graph.width do
+          if graph[i] < graph.min then graph.min = graph[i] end
+        end
       end
 
       for i=0,graph.width - 1 do graph[i]=graph[i+1] end
@@ -218,9 +218,9 @@ function graph_read(graph, name)
       i, v = fdesc:read("*n", "*n")
       -- print("graph[", i, "] =", v)
       if i ~= nil and v ~= nil then
-	 graph[i] = v
+        graph[i] = v
       else
-	 break
+        break
       end
    end
    if fdesc then fdesc:close() end
@@ -229,9 +229,9 @@ function graph_read(graph, name)
    graph.max = graph[0]
    for i = 1,graph.width do
       if graph[i] then
-	 graph.min = math.min(graph.min, graph[i])
-	 graph.max = math.max(graph.max, graph[i])
-	 metar_temp = graph[i]
+        graph.min = math.min(graph.min, graph[i])
+        graph.max = math.max(graph.max, graph[i])
+        metar_temp = graph[i]
       end
    end
 end
@@ -247,23 +247,23 @@ function conky_main()
       --
       -- graphique température intérieure (CPU 0)
       --
-      
-      temp_int = new_graph(151.5, 77, 150, get_proc_temp("0"))
+
+      temp_int = new_graph(151.5, 87, 150, get_proc_temp("0"))
       temp_int.interval = 5
       temp_int.get_value = graph_get_proc0_temp
-      
+
       graph_set_color(temp_int, TOP, 1.0,0.7,0.0,1)
       graph_set_color(temp_int, BOT, 0.4,0.3,0.0,1)
-   
+
       --
       -- graphique température extérieure (LFRK)
       --
-      
-      temp_ext = new_graph(151.5, 92, 150, metar_temp)
+
+      temp_ext = new_graph(151.5, 103, 150, metar_temp)
       graph_read(temp_ext, "LFRK")
       temp_ext.interval = 900
       temp_ext.get_value = graph_get_lfrk_temp
-      
+
       graph_set_color(temp_ext, TOP, 1.0,0.7,0.0,1)
       graph_set_color(temp_ext, BOT, 0.4,0.3,0.0,1)
 
@@ -286,11 +286,11 @@ function conky_main()
    -- eventually add a new value to graphs
    if temp_int then graph_push(temp_int, iteration, 0) end
    if temp_ext then graph_push(temp_ext, iteration, 0) end
- 
+
    -- plot the graphs
    if temp_int then graph_plot(temp_int) end
    if temp_ext then graph_plot(temp_ext) end
-      
+
    --      cairo_destroy(cr)
    --      cairo_surface_destroy(cs)
    --      cs, cr = nil
