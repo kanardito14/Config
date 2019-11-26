@@ -69,5 +69,5 @@ alias lh='ls -lh'
 alias lgrep='ls -l | grep'
 alias hgrep=' fc -l 0 | grep'
 alias pgrep='ps -eo 'pid,comm,user,%cpu,%mem,nice,pri,start,time,args' | grep -e '%CPU' -e'
-alias purge=" find ~ -type f -name '*~' -print -exec rm {} \;"
+alias purge=" find . -type f -name '*~' -print -exec rm {} \;"
 alias em='emacs --no-window-system --no-splash'

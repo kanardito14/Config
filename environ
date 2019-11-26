@@ -12,7 +12,7 @@ else
 fi
 
 if [ -n "$PS1" ]; then
-    export LESS="-M -R -W -X"
+    export LESS="-F -M -R -W -X"
     export EDITOR=sensible-editor
     export VISUAL=sensible-editor
 fi

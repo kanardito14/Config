@@ -81,7 +81,8 @@ ${color grey}CPU1 Usage:$color ${cpu cpu1}% ${color black}${cpugraph cpu1 10,0 0
 ${color grey}CPU2 Usage:$color ${cpu cpu2}% ${color black}${cpugraph cpu2 10,0 001010 00ffff -t}
 $color$hr
 ${color grey}File systems:
-${color grey}Root:$color $fs_used_perc%${color yellow}$alignr${fs_used /}${color grey} / ${fs_size /}
+${color grey}Root:$color ${fs_used_perc /}%${color yellow}$alignr${fs_used /}${color grey} / ${fs_size /}
+${color grey}Home:$color ${fs_used_perc /home}%${color yellow}$alignr${fs_used /home}${color grey} / ${fs_size /home}
 ${color grey}Sda :$color ${diskio sda}/s ${color black}${diskiograph sda 10,0 404000 ffff00 -t}
 $color$hr
 ${color grey}Networking:
