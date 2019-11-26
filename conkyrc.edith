@@ -1,0 +1,97 @@
+# Conky, a system monitor, based on torsmo
+#
+# Any original torsmo code is licensed under the BSD license
+#
+# All code written since the fork of torsmo is licensed under the GPL
+#
+# Please see COPYING for details
+#
+# Copyright (c) 2004, Hannu Saransaari and Lauri Hakkarainen
+# Copyright (c) 2005-2010 Brenden Matthews, Philip Kovacs, et. al. (see AUTHORS)
+# All rights reserved.
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+
+alignment bottom_right
+background no
+
+border_width 1
+cpu_avg_samples 2
+default_color white
+default_outline_color white
+default_shade_color white
+draw_borders no
+draw_graph_borders yes
+draw_outline no
+draw_shades no
+use_xft yes
+xftfont DejaVu Sans Mono:size=10
+
+minimum_size 5 5
+net_avg_samples 2
+no_buffers yes
+out_to_console no
+out_to_stderr no
+extra_newline no
+
+own_window yes
+own_window_class Conky
+own_window_type normal
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+own_window_argb_visual yes
+own_window_argb_value 63
+
+stippled_borders 0
+update_interval 1.0
+uppercase no
+use_spacer right
+show_graph_scale no
+show_graph_range no
+double_buffer yes
+pad_percents 3
+
+lua_load /home/jfleray/Documents/Config/conky.lua
+lua_draw_hook_post conky_main
+
+# TEXT pour référence
+# ${color black}${lua_graph thermalread 10,0 300000 ff0000 100 -t}
+
+TEXT
+${scroll 35 $nodename $sysname $kernel}
+$color$hr
+${color grey}Uptime   :${color yellow} $uptime
+${color grey}Frequency:${color ffb000} $freq_g GHz
+${color grey}Temp Int :${color green} ${lua thermint 0} C
+${color grey}Temp Ext :${color green} ${lua thermext 0} C
+$color$hr
+${color grey}RAM  Usage:$color $memperc%${color cyan}$alignr$mem${color grey} / $memmax
+${color grey}Swap Usage:$color $swapperc%${color cyan}$alignr$swap${color grey} / $swapmax
+${color grey}CPU1 Usage:$color ${cpu cpu1}% ${color black}${cpugraph cpu1 10,0 001010 00ffff -t}
+${color grey}CPU2 Usage:$color ${cpu cpu2}% ${color black}${cpugraph cpu2 10,0 001010 00ffff -t}
+${color grey}CPU3 Usage:$color ${cpu cpu3}% ${color black}${cpugraph cpu3 10,0 001010 00ffff -t}
+${color grey}CPU4 Usage:$color ${cpu cpu4}% ${color black}${cpugraph cpu4 10,0 001010 00ffff -t}
+$color$hr
+${color grey}File systems:
+${color grey}Root:$color $fs_used_perc%${color yellow}$alignr${fs_used /}${color grey} / ${fs_size /}
+${color grey}Sda :$color ${diskio sda}/s ${color black}${diskiograph sda 10,0 404000 ffff00 -t}
+$color$hr
+${color grey}Networking:
+${color grey}Up  :$color ${upspeed eth0} ${color black}${upspeedgraph eth0 10,0 002000 00ff00 -t}
+${color grey}Down:$color ${downspeed eth0} ${color black}${downspeedgraph eth0 10,0 002000 00ff00 -t}
+$color$hr
+${color grey}Name              PID    CPU%   MEM%
+${color lightgrey} ${top name 1} ${top pid 1} ${top cpu 1} ${top mem 1}
+${color lightgrey} ${top name 2} ${top pid 2} ${top cpu 2} ${top mem 2}
+${color lightgrey} ${top name 3} ${top pid 3} ${top cpu 3} ${top mem 3}
+${color lightgrey} ${top name 4} ${top pid 4} ${top cpu 4} ${top mem 4}
