@@ -87,8 +87,8 @@ ${color grey}Root:$color $fs_used_perc%${color yellow}$alignr${fs_used /}${color
 ${color grey}Sda :$color ${diskio sda}/s ${color black}${diskiograph sda 10,0 404000 ffff00 -t}
 $color$hr
 ${color grey}Networking:
-${color grey}Up  :$color ${upspeed eth0} ${color black}${upspeedgraph eth0 10,0 002000 00ff00 -t}
-${color grey}Down:$color ${downspeed eth0} ${color black}${downspeedgraph eth0 10,0 002000 00ff00 -t}
+${color grey}Up  :$color ${upspeed enp2s0f1} ${color black}${upspeedgraph enp2s0f1 10,0 002000 00ff00 -t}
+${color grey}Down:$color ${downspeed enp2s0f1} ${color black}${downspeedgraph enp2s0f1 10,0 002000 00ff00 -t}
 $color$hr
 ${color grey}Name              PID    CPU%   MEM%
 ${color lightgrey} ${top name 1} ${top pid 1} ${top cpu 1} ${top mem 1}
