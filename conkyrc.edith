@@ -56,7 +56,7 @@ own_window_argb_visual = true,
 own_window_argb_value = 63,
 
 stippled_borders = 0,
-update_interval = 1.0,
+update_interval = 2.0,
 uppercase = false,
 use_spacer = 'right',
 show_graph_scale = false,
