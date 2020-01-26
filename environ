@@ -2,17 +2,14 @@
 # source the file in .profile, .bashrc, .zshrc, ...
 #
 
-if [ -n "$TERMEMU" ]; then
-    export TERMEMU=guake
-else
-    export GTK2_RC_FILES=$HOME/.gtkrc-2.0
-    export TERMEMU=guake
-    export GOPATH=$HOME/Bin/Go
-    export PATH=$GOPATH:$GOPATH/bin:$PATH:$HOME/Bin
-fi
+export GTK2_RC_FILES=$HOME/.gtkrc-2.0
+export TERMEMU=guake
+export GOPATH=$HOME/Bin/Go
+export PATH=$GOPATH/bin:$PATH:$HOME/Bin
 
 if [ -n "$PS1" ]; then
     export LESS="-F -M -R -W -X"
+    export LESSCHARSET=utf-8
     export EDITOR=sensible-editor
     export VISUAL=sensible-editor
 fi
